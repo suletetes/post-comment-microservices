@@ -9,7 +9,11 @@ app.use(cors())
 
 const posts = {}
 
-app.get('/posts', (req, res) => {
+app.get('/events', (req, res) => {
+    res.send(posts)
+})
+
+app.post('/posts', (req, res) => {
     const {type, data} = req.body
     if (type === 'postCreated') {
         const {id, title} = data;
@@ -21,9 +25,6 @@ app.get('/posts', (req, res) => {
         post.comments.push({id, content})
     }
     res.send({})
-})
-app.post('/events', (req, res) => {
-
 })
 
 
