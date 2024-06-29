@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 
 
-export default () => {
+const postCreate = () => {
     const [title, setTitle] = useState('')
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -23,3 +23,5 @@ export default () => {
 
     )
 }
+
+export default postCreate;

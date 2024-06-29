@@ -1,13 +1,13 @@
 import React from "react";
 
-export default ({comments}) => {
-    const renderedComments = comments.map(comment => {
+const commentList = ({comments}) => {
+    const renderedComments = comments.map((comment) => {
         let content;
 
-        if(comment.status === 'approved'){
+        if (comment.status === 'approved') {
             content = comment.content
         }
-        if(comment.status === 'pending'){
+        if (comment.status === 'pending') {
             content = 'This comment is awaiting moderation'
         }
         if (comment.status === 'rejected') {
@@ -18,3 +18,5 @@ export default ({comments}) => {
     })
     return <ul>{renderedComments}</ul>
 }
+
+export default commentList;
