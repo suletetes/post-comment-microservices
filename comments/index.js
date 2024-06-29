@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const {randomBytes} = require('crypto')
 const cors = require('cors')
 const app = express();
+
+const axios = require('axios')
 app.use(bodyParser.json())
 app.use(cors())
 
@@ -19,6 +21,14 @@ app.post('/post/:id/comments', (req, res) => {
 
     comments.push({id: commentId, content})
     commentsByPostId[req.params.id] = comments
+    axios.post('http://localhost:4005/events', {
+        type: 'commentCreated',
+        data: {
+            id: commentId,
+            content,
+            postId: req.params.id
+        }
+    })
     res.status(201).send(comments)
 })
 
