@@ -33,7 +33,7 @@ app.post('/post/:id/comments', (req, res) => {
     res.status(201).send(comments)
 })
 
-app.post('/events', (req, res) => {
+app.post('/events', async (req, res) => {
     console.log('Received Event', req.body.type)
     const {type, data} = req.body;
     if (type === 'commentModerated') {
@@ -43,6 +43,15 @@ app.post('/events', (req, res) => {
             return comment.id === id;
         })
         comment.status = status
+        await axios.post('http://localhost:4005', {
+            type: 'commentUpdated',
+            data: {
+                id,
+                status,
+                postId,
+                content
+            }
+        })
     }
     res.send({});
 })
